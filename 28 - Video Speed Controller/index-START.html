@@ -15,6 +15,15 @@
   </div>
 
 <script>
+  let speedBar = document.getElementsByClassName('speed');
+
+  speedBar[0].addEventListener('mousemove', function(event){
+    var y_mouse = event.clientY;
+    var rect = speedBar[0].getBoundingClientRect();
+    let speedBarTop = rect.top;
+    let newHeight = y_mouse-speedBarTop;
+    document.getElementsByClassName('speed-bar')[0].style.height = `${newHeight}px`;
+  });
 </script>
 </body>
 </html>
