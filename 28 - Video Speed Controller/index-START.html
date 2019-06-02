@@ -8,21 +8,28 @@
 <body>
 
   <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <video id="myVideo" class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
     <div class="speed">
       <div class="speed-bar">1×</div>
     </div>
   </div>
 
 <script>
-  let speedBar = document.getElementsByClassName('speed');
-
-  speedBar[0].addEventListener('mousemove', function(event){
+  let speed = document.getElementsByClassName('speed');
+  var purpleBar = document.getElementsByClassName('speed-bar')[0];
+  speed[0].addEventListener('mousemove', function(event){
     var y_mouse = event.clientY;
-    var rect = speedBar[0].getBoundingClientRect();
-    let speedBarTop = rect.top;
-    let newHeight = y_mouse-speedBarTop;
-    document.getElementsByClassName('speed-bar')[0].style.height = `${newHeight}px`;
+    let h = this.offsetHeight;
+    let speedTop = this.offsetTop;
+    let newHeight = y_mouse-speedTop;
+    var vid = document.getElementById("myVideo");
+    let playbackRate = ((newHeight/h) * 4).toFixed(1);
+    vid.playbackRate = playbackRate;
+    if(newHeight <= h) {
+      purpleBar.style.height = `${newHeight}px`;
+    }
+    purpleBar.innerHTML = playbackRate + 'x';
+
   });
 </script>
 </body>
